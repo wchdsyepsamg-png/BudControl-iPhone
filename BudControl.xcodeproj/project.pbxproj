@@ -1,0 +1,251 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000001 /* BudControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* BudControlApp.swift */; };
+		A10000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* ContentView.swift */; };
+		A10000000000000000000003 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000003 /* BluetoothManager.swift */; };
+		A10000000000000000000004 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000004 /* Models.swift */; };
+		A10000000000000000000005 /* EarbudCommandAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000005 /* EarbudCommandAdapter.swift */; };
+		A10000000000000000000006 /* AudioRouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000007 /* AudioRouteManager.swift */; };
+		A10000000000000000000007 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000008 /* Assets.xcassets */; };
+		A10000000000000000000008 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000009 /* PrivacyInfo.xcprivacy */; };
+		A10000000000000000000009 /* ProtocolFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000A /* ProtocolFinder.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A20000000000000000000001 /* BudControlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudControlApp.swift; sourceTree = "<group>"; };
+		A20000000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A20000000000000000000003 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
+		A20000000000000000000004 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		A20000000000000000000005 /* EarbudCommandAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarbudCommandAdapter.swift; sourceTree = "<group>"; };
+		A20000000000000000000006 /* BudControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = BudControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20000000000000000000007 /* AudioRouteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRouteManager.swift; sourceTree = "<group>"; };
+		A20000000000000000000008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A20000000000000000000009 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		A2000000000000000000000A /* ProtocolFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolFinder.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A30000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A40000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				A40000000000000000000002 /* BudControl */,
+				A40000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A40000000000000000000002 /* BudControl */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000001 /* BudControlApp.swift */,
+				A20000000000000000000002 /* ContentView.swift */,
+				A20000000000000000000003 /* BluetoothManager.swift */,
+				A20000000000000000000004 /* Models.swift */,
+				A20000000000000000000005 /* EarbudCommandAdapter.swift */,
+				A20000000000000000000007 /* AudioRouteManager.swift */,
+				A20000000000000000000008 /* Assets.xcassets */,
+				A20000000000000000000009 /* PrivacyInfo.xcprivacy */,
+				A2000000000000000000000A /* ProtocolFinder.swift */,
+			);
+			path = BudControl;
+			sourceTree = "<group>";
+		};
+		A40000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000006 /* BudControl.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A50000000000000000000001 /* BudControl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A90000000000000000000002 /* Build configuration list for PBXNativeTarget "BudControl" */;
+			buildPhases = (
+				A60000000000000000000001 /* Sources */,
+				A30000000000000000000001 /* Frameworks */,
+				A70000000000000000000001 /* Resources */,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = BudControl;
+			productName = BudControl;
+			productReference = A20000000000000000000006 /* BudControl.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A80000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					A50000000000000000000001 = { CreatedOnToolsVersion = 16.0; };
+				};
+			};
+			buildConfigurationList = A90000000000000000000001 /* Build configuration list for PBXProject "BudControl" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base);
+			mainGroup = A40000000000000000000001;
+			productRefGroup = A40000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (A50000000000000000000001 /* BudControl */);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A70000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000007 /* Assets.xcassets in Resources */,
+				A10000000000000000000008 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A60000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000001 /* BudControlApp.swift in Sources */,
+				A10000000000000000000002 /* ContentView.swift in Sources */,
+				A10000000000000000000003 /* BluetoothManager.swift in Sources */,
+				A10000000000000000000004 /* Models.swift in Sources */,
+				A10000000000000000000005 /* EarbudCommandAdapter.swift in Sources */,
+				A10000000000000000000006 /* AudioRouteManager.swift in Sources */,
+				A10000000000000000000009 /* ProtocolFinder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA0000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+		};
+			name = Debug;
+		};
+		AA0000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA0000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "BudControl Finder";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "BudControl uses Bluetooth to discover and connect to compatible earbuds.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 6.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.budcontrol.protocolfinder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		AA0000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "BudControl Finder";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "BudControl uses Bluetooth to discover and connect to compatible earbuds.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 6.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.budcontrol.protocolfinder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A90000000000000000000001 /* Build configuration list for PBXProject "BudControl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (AA0000000000000000000001 /* Debug */, AA0000000000000000000002 /* Release */);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A90000000000000000000002 /* Build configuration list for PBXNativeTarget "BudControl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (AA0000000000000000000003 /* Debug */, AA0000000000000000000004 /* Release */);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A80000000000000000000001 /* Project object */;
+}
