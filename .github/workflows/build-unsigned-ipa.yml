@@ -1,0 +1,165 @@
+name: Build BudControl IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Locate project
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PROJECT_PATH="$(find "$GITHUB_WORKSPACE" -maxdepth 6 -type d -name 'BudControl.xcodeproj' -print -quit)"
+          if [ -z "$PROJECT_PATH" ]; then
+            echo "::error::BudControl.xcodeproj was not found."
+            find "$GITHUB_WORKSPACE" -maxdepth 5 -print
+            exit 1
+          fi
+
+          PROJECT_DIR="$(dirname "$PROJECT_PATH")"
+          echo "PROJECT_PATH=$PROJECT_PATH" >> "$GITHUB_ENV"
+          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
+          echo "Project: $PROJECT_PATH"
+
+      - name: Validate project
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          plutil -lint "$PROJECT_PATH/project.pbxproj"
+          plutil -lint "$PROJECT_DIR/BudControl/PrivacyInfo.xcprivacy"
+          xcodebuild -project "$PROJECT_PATH" -scheme BudControl -list
+
+      - name: Build unsigned iPhone app
+        id: xcode_build
+        shell: bash
+        run: |
+          set -uo pipefail
+
+          BUILD_ROOT="$GITHUB_WORKSPACE/BuildOutput"
+          rm -rf "$BUILD_ROOT"
+          mkdir -p "$BUILD_ROOT"
+
+          set +e
+          xcodebuild clean build \
+            -project "$PROJECT_PATH" \
+            -scheme BudControl \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath "$BUILD_ROOT/DerivedData" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY='' \
+            COMPILER_INDEX_STORE_ENABLE=NO \
+            SWIFT_VERSION=5.0 \
+            2>&1 | tee "$BUILD_ROOT/xcodebuild.log"
+          STATUS=${PIPESTATUS[0]}
+          set -e
+
+          if [ "$STATUS" -ne 0 ]; then
+            echo "### Xcode errors" >> "$GITHUB_STEP_SUMMARY"
+            grep -nE '(^| )error:|fatal error:' "$BUILD_ROOT/xcodebuild.log" \
+              | tail -n 100 >> "$GITHUB_STEP_SUMMARY" || true
+            exit "$STATUS"
+          fi
+
+      - name: Locate compiled application
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PRODUCTS_DIR="$GITHUB_WORKSPACE/BuildOutput/DerivedData/Build/Products"
+          echo "Searching for compiled applications under: $PRODUCTS_DIR"
+          find "$PRODUCTS_DIR" -maxdepth 4 -print || true
+
+          APP_PATH="$(find "$PRODUCTS_DIR" -type d -name 'BudControl.app' -print -quit)"
+          if [ -z "$APP_PATH" ] || [ ! -d "$APP_PATH" ]; then
+            echo "::error::The build completed, but BudControl.app was not found."
+            exit 1
+          fi
+
+          INFO_PLIST="$APP_PATH/Info.plist"
+          if [ ! -f "$INFO_PLIST" ]; then
+            echo "::error::Compiled app is missing Info.plist: $APP_PATH"
+            exit 1
+          fi
+
+          EXECUTABLE_NAME="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleExecutable' "$INFO_PLIST")"
+          if [ -z "$EXECUTABLE_NAME" ] || [ ! -f "$APP_PATH/$EXECUTABLE_NAME" ]; then
+            echo "::error::Compiled app executable was not found in $APP_PATH"
+            ls -la "$APP_PATH"
+            exit 1
+          fi
+
+          echo "APP_PATH=$APP_PATH" >> "$GITHUB_ENV"
+          echo "APP_NAME=$(basename "$APP_PATH")" >> "$GITHUB_ENV"
+          echo "EXECUTABLE_NAME=$EXECUTABLE_NAME" >> "$GITHUB_ENV"
+          echo "Compiled app: $APP_PATH"
+          echo "Executable: $EXECUTABLE_NAME"
+
+      - name: Package unsigned IPA
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BUILD_ROOT="$GITHUB_WORKSPACE/BuildOutput"
+          PACKAGE_ROOT="$BUILD_ROOT/Package"
+          ARTIFACT_ROOT="$GITHUB_WORKSPACE/Artifacts"
+          IPA_PATH="$ARTIFACT_ROOT/BudControl-unsigned.ipa"
+
+          rm -rf "$PACKAGE_ROOT" "$ARTIFACT_ROOT"
+          mkdir -p "$PACKAGE_ROOT/Payload" "$ARTIFACT_ROOT"
+
+          /usr/bin/ditto "$APP_PATH" "$PACKAGE_ROOT/Payload/$APP_NAME"
+          test -f "$PACKAGE_ROOT/Payload/$APP_NAME/$EXECUTABLE_NAME"
+
+          cd "$PACKAGE_ROOT"
+          /usr/bin/zip -qry --symlinks "$IPA_PATH" Payload
+
+          test -s "$IPA_PATH"
+          /usr/bin/unzip -t "$IPA_PATH"
+
+          echo "Created IPA: $IPA_PATH"
+          ls -lh "$IPA_PATH"
+
+      - name: Verify IPA contents
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          IPA_PATH="$GITHUB_WORKSPACE/Artifacts/BudControl-unsigned.ipa"
+          test -s "$IPA_PATH"
+          /usr/bin/unzip -l "$IPA_PATH" | tee "$GITHUB_WORKSPACE/BuildOutput/ipa-contents.txt"
+
+          /usr/bin/unzip -l "$IPA_PATH" | grep -q 'Payload/BudControl.app/Info.plist'
+          /usr/bin/unzip -l "$IPA_PATH" | grep -q "Payload/BudControl.app/$EXECUTABLE_NAME"
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v5
+        with:
+          name: BudControl-unsigned-IPA
+          path: ${{ github.workspace }}/Artifacts/BudControl-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: BudControl-Build-Diagnostics
+          path: |
+            ${{ github.workspace }}/BuildOutput/xcodebuild.log
+            ${{ github.workspace }}/BuildOutput/ipa-contents.txt
+          if-no-files-found: ignore
+          retention-days: 14
